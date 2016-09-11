@@ -50,6 +50,8 @@ or as an [ES7 class decorator](https://github.com/wycats/javascript-decorators)
     -   `$0.containerStyle`   (optional, default `defaultContainerStyle`)
     -   `$0.className`   (optional, default `null`)
     -   `$0.elementResize`   (optional, default `false`)
+    -   `options.withRef` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)=** Set true to enable accessing the wrapped instance with
+        [getWrappedInstance()](https://github.com/digidem/react-dimensions#getwrappedinstance). Disable this when wrapping stateless components, as they cannot use `refs`. (optional, default `true`)
 
 **Examples**
 

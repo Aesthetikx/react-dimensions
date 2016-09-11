@@ -83,6 +83,7 @@ module.exports = function Dimensions ({
     containerStyle = defaultContainerStyle,
     className = null,
     elementResize = false
+    withRef = true
   } = {}) {
   return (ComposedComponent) => {
     return class DimensionsHOC extends React.Component {
@@ -147,7 +148,10 @@ module.exports = function Dimensions ({
        * @return {object} The rendered React component
        **/
       getWrappedInstance () {
-        this.refs.wrappedInstance
+        if (!withRef) {
+          console.warn('You need to enable the `withRef` option to access the wrapped instance')
+        }
+        return this.refs.wrappedInstance
       }
 
       render () {
@@ -155,6 +159,7 @@ module.exports = function Dimensions ({
         if (!containerWidth && !containerHeight) {
           console.warn('Wrapper div has no height or width, try overriding style with `containerStyle` option')
         }
+        const ref = withRef ? 'wrappedInstance' : null
         return (
           <div className={className} style={containerStyle} ref='container'>
             {(containerWidth || containerHeight) &&
@@ -162,7 +167,7 @@ module.exports = function Dimensions ({
                 {...this.state}
                 {...this.props}
                 updateDimensions={this.updateDimensions}
-                ref='wrappedInstance'
+                ref={ref}
               />
             }
           </div>
